@@ -28,6 +28,7 @@ const CameraAccess = ({ onCameraActive }) => {
   const [attendanceLogs, setAttendanceLogs] = useState([]);
   const loggedTodayRef = useRef(new Set()); // Prevents duplicate logging
   
+  const registeredStudentsRef = useRef([]);
   const currentDetectionsRef = useRef([]);
 
   useEffect(() => {
@@ -39,6 +40,7 @@ const CameraAccess = ({ onCameraActive }) => {
           descriptor: new Float32Array(s.descriptor)
         }));
         setRegisteredStudents(parsed);
+        registeredStudentsRef.current = parsed;
       }
     } catch (err) {
       console.error("Failed to parse local storage registry", err);
@@ -46,21 +48,38 @@ const CameraAccess = ({ onCameraActive }) => {
   }, []);
 
   useEffect(() => {
-    const loadModels = async () => {
-      try {
-        const MODEL_URL = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@master/weights';
-        await Promise.all([
-          faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-          faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-          faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL)
-        ]);
-        setModelsLoaded(true);
-      } catch (err) {
-        console.error("Failed to load models", err);
-        setError("Failed to load face detection models.");
-      }
+    const loadFaceModels = async (baseUrl) => {
+      await Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri(baseUrl),
+        faceapi.nets.faceLandmark68Net.loadFromUri(baseUrl),
+        faceapi.nets.faceRecognitionNet.loadFromUri(baseUrl)
+      ]);
     };
-    loadModels();
+
+    const initializeModels = async () => {
+      const modelUrls = [
+        'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/weights/',
+        'https://justadudewhohacks.github.io/face-api.js/models/'
+      ];
+
+      let lastError = null;
+      for (const url of modelUrls) {
+        try {
+          console.log('Loading face-api models from', url);
+          await loadFaceModels(url);
+          setModelsLoaded(true);
+          return;
+        } catch (err) {
+          lastError = err;
+          console.warn(`Model load failed for ${url}`, err);
+        }
+      }
+
+      console.error('Failed to load face-api models from all known URLs', lastError);
+      setError('Failed to load face detection models. Please check your network connection or try again later.');
+    };
+
+    initializeModels();
   }, []);
 
   // Initialize Stellar Blockchain Service
@@ -121,6 +140,10 @@ const CameraAccess = ({ onCameraActive }) => {
     if (!modelsLoaded || !videoRef.current || !canvasRef.current) return;
     
     const displaySize = { width: videoRef.current.videoWidth, height: videoRef.current.videoHeight };
+    if (canvasRef.current) {
+      canvasRef.current.width = displaySize.width;
+      canvasRef.current.height = displaySize.height;
+    }
     faceapi.matchDimensions(canvasRef.current, displaySize);
 
     const detectInterval = setInterval(async () => {
@@ -137,8 +160,9 @@ const CameraAccess = ({ onCameraActive }) => {
       currentDetectionsRef.current = detections;
 
       let faceMatcher = null;
-      if (registeredStudents.length > 0) {
-        const labeledDescriptors = registeredStudents.map(student => 
+      const currentRegistered = registeredStudentsRef.current;
+      if (currentRegistered.length > 0) {
+        const labeledDescriptors = currentRegistered.map(student => 
           new faceapi.LabeledFaceDescriptors(student.name, [student.descriptor])
         );
         faceMatcher = new faceapi.FaceMatcher(labeledDescriptors, 0.6);
@@ -272,6 +296,7 @@ const CameraAccess = ({ onCameraActive }) => {
       const updatedList = [...filtered, { name: newStudent.name, descriptor: new Float32Array(newStudent.descriptor) }];
       
       setRegisteredStudents(updatedList);
+      registeredStudentsRef.current = updatedList;
       
       const persistList = updatedList.map(s => ({
         name: s.name,
@@ -296,6 +321,7 @@ const CameraAccess = ({ onCameraActive }) => {
   const handleClearRegistry = () => {
     if (window.confirm("Are you sure you want to clear all registered faces?")) {
       setRegisteredStudents([]);
+      registeredStudentsRef.current = [];
       localStorage.removeItem('registeredStudents');
       setRegisterMessage({ text: 'Registry cleared successfully.', type: 'success' });
     }
