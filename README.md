@@ -1,66 +1,90 @@
-# React + Vite
+📌 Smart Attendance App using Blockchain
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A secure and transparent attendance management system built using Blockchain Technology to eliminate proxy attendance and prevent data tampering.
 
-Currently, two official plugins are available:
+🚀 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Traditional attendance systems are prone to issues like:
 
-## React Compiler
+Proxy attendance
+Data manipulation
+Lack of transparency
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project solves these problems by using Blockchain, ensuring that once attendance is recorded, it cannot be altered or deleted.
 
-## Local development
+🎯 Features
+🔐 Secure Authentication System
+📍 Location-based Attendance (optional)
+🔗 Blockchain Integration (Tamper-proof records)
+📊 Real-time Attendance Tracking
+👨‍🏫 Admin Dashboard
+📱 User-friendly Interface
+🛠️ Tech Stack
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Start the dev server:
-   ```bash
-   npm run dev
-   ```
-3. Open the app in your browser:
-   ```
-   http://localhost:5173
-   ```
+Frontend:
 
-> The app now uses `HashRouter`, so it should work reliably when reloading or opening routes directly.
+React.js / HTML / CSS / JavaScript
 
-## Deployment
+Backend:
 
-This project can be deployed to any static-hosting service that supports Vite-built apps.
+Node.js / Express.js
 
-### Deploy to Vercel
+Blockchain:
 
-1. Sign in to Vercel and create a new project from your repository.
-2. Set the framework preset to `Vite`.
-3. Use `npm install` for install command and `npm run build` for build command.
-4. Set the publish directory to `dist`.
+Ethereum / Smart Contracts (Solidity)
 
-### Deploy to Netlify
+Other Tools:
 
-1. Connect your repository to Netlify.
-2. Set build command to:
-   ```bash
-   npm run build
-   ```
-3. Set publish directory to:
-   ```
-   dist
-   ```
+MetaMask (for wallet interaction)
+Web3.js / Ethers.js
+⚙️ How It Works
+User logs into the system
+Identity is verified (Login / Authentication)
+User marks attendance
+Attendance data is sent to blockchain
+Smart contract stores the record permanently
+Admin can view attendance reports
+📸 Screenshots
 
-### Deploy to GitHub Pages
+(Add your project screenshots here)
 
-1. Build the project:
-   ```bash
-   npm run build
-   ```
-2. Serve the `dist` folder using GitHub Pages or any static file host.
+![Screenshot1](link)
+![Screenshot2](link)
+🧠 Why Blockchain?
+✅ Immutable data (cannot be changed)
+✅ Decentralized system
+✅ Transparent records
+✅ Eliminates fake attendance
+📈 Future Improvements
+🤖 AI-based Face Recognition
+🏫 Integration with College ERP Systems
+🌐 Multi-user & Multi-organization support
+📶 Offline support with sync
+⚠️ Limitations
+Gas fees (if using public blockchain)
+Internet dependency
+Initial setup complexity
+📂 Project Setup
+1️⃣ Clone the repository
+git clone https://github.com/sachinnit25/SMART-ATTENDANCE-APP-USING-BLOCKCHAIN.git
+2️⃣ Navigate to project folder
+cd SMART-ATTENDANCE-APP-USING-BLOCKCHAIN
+3️⃣ Install dependencies
+npm install
+4️⃣ Run the project
+npm start
+🤝 Contributing
 
-If you want, I can also add a GitHub Pages deploy script or a Netlify configuration file next.  
+Contributions are welcome!
+Feel free to fork this repo and submit a pull request.
 
-## Expanding the ESLint configuration
+📜 License
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project is licensed under the MIT License.
+
+👨‍💻 Author
+
+Sachin Dev
+
+GitHub: https://github.com/sachinnit25
+⭐ Support
