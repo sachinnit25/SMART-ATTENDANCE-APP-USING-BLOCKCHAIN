@@ -37,6 +37,7 @@ Other Tools:
 
 MetaMask (for wallet interaction)
 Web3.js / Ethers.js
+
 ⚙️ How It Works
 User logs into the system
 Identity is verified (Login / Authentication)
@@ -44,27 +45,35 @@ User marks attendance
 Attendance data is sent to blockchain
 Smart contract stores the record permanently
 Admin can view attendance reports
+
 📸 Screenshots
 
-(Add your project screenshots here)
+![Screenshot1] <img width="1920" height="938" alt="Screenshot (79)" src="https://github.com/user-attachments/assets/58ce3558-37d7-4d27-a603-7e967b444f28" />
 
-![Screenshot1](link)
-![Screenshot2](link)
-🧠 Why Blockchain?
+![Screenshot2] <img width="1920" height="927" alt="Screenshot (80)" src="https://github.com/user-attachments/assets/ee4615e2-1087-4b2d-bc97-5905cd37a5cb" />
+
+🧠 Why Blockchain?              
+
 ✅ Immutable data (cannot be changed)
 ✅ Decentralized system
 ✅ Transparent records
-✅ Eliminates fake attendance
+✅ Eliminates fake attendance  
+
 📈 Future Improvements
+
 🤖 AI-based Face Recognition
 🏫 Integration with College ERP Systems
 🌐 Multi-user & Multi-organization support
 📶 Offline support with sync
+
 ⚠️ Limitations
+
 Gas fees (if using public blockchain)
 Internet dependency
 Initial setup complexity
+
 📂 Project Setup
+
 1️⃣ Clone the repository
 git clone https://github.com/sachinnit25/SMART-ATTENDANCE-APP-USING-BLOCKCHAIN.git
 2️⃣ Navigate to project folder
@@ -73,6 +82,7 @@ cd SMART-ATTENDANCE-APP-USING-BLOCKCHAIN
 npm install
 4️⃣ Run the project
 npm start
+
 🤝 Contributing
 
 Contributions are welcome!
@@ -87,4 +97,3 @@ This project is licensed under the MIT License.
 Sachin Dev
 
 GitHub: https://github.com/sachinnit25
-⭐ Support
